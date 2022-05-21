@@ -4,44 +4,24 @@ import java.util.*;
 
 public class Todos {
 
-    public String type;
-
-    public String task;
-
-    public static List<String> tasksList = new ArrayList<>();
-
-    public String getAction() {
-        return type;
-    }
-
-    public String getTask() {
-        return task;
-    }
-
-    public List<String> getTasksList() {
-        return tasksList;
-    }
+    private List<String> tasksList = new ArrayList<>();
 
     public void addTask(String task) {
-
         tasksList.add(task);
     }
 
     public void removeTask(String task) {
-
         tasksList.remove(task);
     }
 
-    public void clearTasksList() {
-        tasksList.clear();
-    }
-
     public String getAllTasks() {
-
-        Optional<String> reduced = tasksList.stream()
-                .sorted(Comparator.reverseOrder())
-                .reduce((value, combinedValue) -> combinedValue + " " + value);
-        return reduced.orElse("Список задач пуст.");
+        Collections.sort(tasksList);
+        StringBuilder builder = new StringBuilder();
+        for (String task : tasksList) {
+            builder.append(task).append(" ");
+        }
+        return builder.toString();
     }
+
 
 }
